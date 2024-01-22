@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  cloud:
+    nacos:
+      discovery:
+        password: nacos
+        username: nacos
+        namespace: 443409e7-d225-4d01-8e78-da4b1daced80
+        server-addr: 192.168.52.129:8848
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*Mapper.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      logic-delete-value: true
+      logic-not-delete-value: false

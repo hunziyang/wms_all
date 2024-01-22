@@ -1,0 +1,9 @@
+server:
+  port: 8091
+  servlet:
+    context-path: /user-service
+spring:
+  application:
+    name: user-service
+  config:
+    import: core.yml

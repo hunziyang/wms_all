@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yang.cloud.wms_all.user.mapper.UserMapper">
+
+    <resultMap type="com.yang.cloud.wms_all.user.entity.User" id="UserMap">
+        <result property="id" column="ID" jdbcType="INTEGER"/>
+        <result property="username" column="USERNAME" jdbcType="VARCHAR"/>
+        <result property="password" column="PASSWORD" jdbcType="VARCHAR"/>
+        <result property="salt" column="SALT" jdbcType="VARCHAR"/>
+        <result property="isLocked" column="IS_LOCKED" jdbcType="INTEGER"/>
+        <result property="name" column="NAME" jdbcType="VARCHAR"/>
+        <result property="phone" column="PHONE" jdbcType="VARCHAR"/>
+        <result property="gender" column="GENDER" jdbcType="INTEGER"/>
+        <result property="birthday" column="BIRTHDAY" jdbcType="TIMESTAMP"/>
+        <result property="revision" column="REVISION" jdbcType="INTEGER"/>
+        <result property="uniqueKey" column="UNIQUE_KEY" jdbcType="INTEGER"/>
+        <result property="isDelete" column="IS_DELETE" jdbcType="INTEGER"/>
+        <result property="createdId" column="CREATED_ID" jdbcType="INTEGER"/>
+        <result property="createdName" column="CREATED_NAME" jdbcType="VARCHAR"/>
+        <result property="createdTime" column="CREATED_TIME" jdbcType="TIMESTAMP"/>
+        <result property="updatedId" column="UPDATED_ID" jdbcType="INTEGER"/>
+        <result property="updatedName" column="UPDATED_NAME" jdbcType="VARCHAR"/>
+        <result property="updatedTime" column="UPDATED_TIME" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="column" >
+        ID,USERNAME,PASSWORD,SALT,IS_LOCKED,NAME,PHONE,GENDER,BIRTHDAY,REVISION,UNIQUE_KEY,IS_DELETE,CREATED_ID,CREATED_NAME,CREATED_TIME,UPDATED_ID,UPDATED_NAME,UPDATED_TIME
+    </sql>
+
+    <select id="selectByUsername" resultMap="UserMap">
+        SELECT <include refid="column"/> FROM USER
+        WHERE USERNAME = #{username}
+        AND IS_DELETE = FALSE
+    </select>
+
+</mapper>
+

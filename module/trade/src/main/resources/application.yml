@@ -1,0 +1,9 @@
+spring:
+  config:
+    import: core.yml
+  application:
+    name: trade-service
+server:
+  servlet:
+    context-path: /trade-service
+  port: 8092

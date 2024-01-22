@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: gateway
+  cloud:
+    nacos:
+      discovery:
+        password: nacos
+        username: nacos
+        namespace: 443409e7-d225-4d01-8e78-da4b1daced80
+        server-addr: 192.168.52.129:8848
+    gateway:
+      routes:
+        - id: user
+          uri: lb://user-service
+          predicates:
+            - Path=/user-service/**
+        - id: product
+          uri: lb://product-service
+          predicates:
+            - Path=/product-service/**
+        - id: trade
+          uri: lb://trade-service
+          predicates:
+            - Path=/trade-service/**
+server:
+  port: 8090

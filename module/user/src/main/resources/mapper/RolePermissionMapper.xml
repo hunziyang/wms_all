@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yang.cloud.wms_all.user.mapper.RolePermissionMapper">
+
+    <resultMap type="com.yang.cloud.wms_all.user.entity.RolePermission" id="RolePermissionMap">
+        <result property="id" column="ID" jdbcType="INTEGER"/>
+        <result property="roleId" column="ROLE_ID" jdbcType="VARCHAR"/>
+        <result property="permissionId" column="PERMISSION_ID" jdbcType="VARCHAR"/>
+        <result property="uniqueKey" column="UNIQUE_KEY" jdbcType="INTEGER"/>
+        <result property="revision" column="REVISION" jdbcType="INTEGER"/>
+        <result property="isDelete" column="IS_DELETE" jdbcType="INTEGER"/>
+        <result property="createdId" column="CREATED_ID" jdbcType="INTEGER"/>
+        <result property="createdName" column="CREATED_NAME" jdbcType="VARCHAR"/>
+        <result property="createdTime" column="CREATED_TIME" jdbcType="TIMESTAMP"/>
+        <result property="updatedId" column="UPDATED_ID" jdbcType="INTEGER"/>
+        <result property="updatedName" column="UPDATED_NAME" jdbcType="VARCHAR"/>
+        <result property="updatedTime" column="UPDATED_TIME" jdbcType="TIMESTAMP"/>
+    </resultMap>
+</mapper>
+

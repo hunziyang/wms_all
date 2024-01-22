@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yang.cloud.wms_all.trade.mapper.TradeMapper">
+
+    <resultMap type="com.yang.cloud.wms_all.trade.entity.Trade" id="TradeMap">
+        <result property="id" column="ID" jdbcType="INTEGER"/>
+        <result property="number" column="NUMBER" jdbcType="VARCHAR"/>
+        <result property="status" column="STATUS" jdbcType="INTEGER"/>
+        <result property="message" column="MESSAGE" jdbcType="VARCHAR"/>
+        <result property="uniqueKey" column="UNIQUE_KEY" jdbcType="INTEGER"/>
+        <result property="revision" column="REVISION" jdbcType="INTEGER"/>
+        <result property="isDelete" column="IS_DELETE" jdbcType="INTEGER"/>
+        <result property="createdId" column="CREATED_ID" jdbcType="INTEGER"/>
+        <result property="createdName" column="CREATED_NAME" jdbcType="VARCHAR"/>
+        <result property="createdTime" column="CREATED_TIME" jdbcType="TIMESTAMP"/>
+        <result property="updatedId" column="UPDATED_ID" jdbcType="INTEGER"/>
+        <result property="updatedName" column="UPDATED_NAME" jdbcType="VARCHAR"/>
+        <result property="updatedTime" column="UPDATED_TIME" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="column">
+        ID,NUMBER,STATUS,MESSAGE,UNIQUE_KEY,REVISION,IS_DELETE,CREATED_ID,CREATED_NAME,CREATED_TIME,UPDATED_ID,UPDATED_NAME,UPDATED_TIME
+    </sql>
+
+    <select id="select" resultMap="selectMap">
+        SELECT
+            t.<include refid="column"/>
+        FROM `TRADE` t,(<include refid="selectBaseSql"/> limit #{offset},#{size} ) ids
+        WHERE
+           t.id = ids.id
+    </select>
+
+    <sql id="selectBaseSql">
+        SELECT
+            ID
+        FROM
+            `TRADE`
+        <where>
+            IS_DELETE = FALSE
+            <if test="query.number != null and query.number != ''">
+                AND NUMBER LIKE CONCAT( '%', #{query.number}, '%' )
+            </if>
+            <if test="query.tradeType != null">
+                AND `STATUS` = #{query.tradeType}
+            </if>
+            <if test="query.dateRange != null and query.dateRange.startAt != null">
+                AND CREATED_TIME &gt;= #{query.dateRange.startAt}
+            </if>
+            <if test="query.dateRange != null and query.dateRange.endAt != null">
+                AND CREATED_TIME &lt;= #{query.dateRange.endAt}
+            </if>
+        </where>
+    </sql>
+
+    <resultMap id="selectMap" type="com.yang.cloud.wms_all.trade.dto.TradeDetailDto" extends="TradeMap">
+        <collection property="tradeDetails" select="com.yang.cloud.wms_all.trade.mapper.TradeDetailMapper.selectById" column="{id=id}"/>
+    </resultMap>
+
+    <select id="selectCount" resultType="long">
+        SELECT count(1) FROM (<include refid="selectBaseSql"/>) ids
+    </select>
+
+</mapper>
+

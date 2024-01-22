@@ -1,0 +1,14 @@
+spring:
+  cloud:
+    nacos:
+      config:
+        username: nacos
+        password: nacos
+        namespace: 443409e7-d225-4d01-8e78-da4b1daced80
+        file-extension: yaml
+        server-addr: 192.168.52.129:8848
+        shared-configs:
+          - data-id: mysql.yaml
+            refresh: true
+          - data-id: redis.yaml
+            refresh: true
